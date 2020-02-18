@@ -1,11 +1,20 @@
 version: '3.7'
 
 services:
-  web:
-    build: .
+  app:
+    image: node:12.16.0-slim
     ports:
-      - "3000:3000"
+      - 3000:3000
     volumes:
       - ./:/app
-    working_dir: "/app/web"
-    command: bash -c "npm install && npm start"
+    working_dir: "/app/app"
+    command: bash -c "npm start"
+
+  cmd:
+    image: node:12.16.0-slim
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+    working_dir: "/app"
+    command: /bin/bash
